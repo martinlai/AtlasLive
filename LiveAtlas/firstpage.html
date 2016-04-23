@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset='utf-8' />
+<title>Live Atlas</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.17.0/mapbox-gl.js'></script>
+    <script src='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js'></script>
+<link href='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css' rel='stylesheet' />
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.17.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%; }
+    </style>
+<link rel="stylesheet" type="text/css" href="style.css">
+<button id="information"></button>
+</head>
+<div id='map'></div>
+<div1>
+<body>
+<br>
+<p1> Atlas Live Project!</p>
+
+<input type="text" id="datepicker" placeholder="dd/mm/yyyy">
+<br>
+<br>
+<br>
+<input type="text" id="location" placeholder="Location">
+<br>
+<br>
+<br>
+<select id="search" id="lookingFor">
+<option value="humidity">Humidity</option>
+<option value="Precipitation">Precipitation</option>
+<option value="Temperature">Temperature</option>
+</select>
+<br>
+<br>
+<br>
+<input type="text" id="duration" placeholder="Duration">
+
+<button onclick='submit();' id="search">search</button>
+<script>
+function submit() {
+  var didClickIt = false;
+  input = document.getElementById("location").value;
+//  GET /geocoding/v5/{mode}/{query}.json
+
+  if (input.toUpperCase() == "MALTA") {
+    fly(14.375416, 35.937496);
+  } else if (input.toUpperCase() == "JERUSALEM") {
+    fly(35.213710, 31.768319);
+  } else if (input.toUpperCase() == "CHORNOBYL") {
+    fly(30.1055, 51.3894);
+  } else {
+    fly(-79.3832, 43.6532); //toronto
+  }
+}
+
+mapboxgl.accessToken = 'pk.eyJ1IjoibGlkaXlhbSIsImEiOiJjaW5jb3A4b3Uwd25idHFsd2toeGZuZWxwIn0.Pq8coI5Dw64qXL7VqFzHMA';
+var map = new mapboxgl.Map({
+    container: 'map', // container id
+    style: 'mapbox://styles/mapbox/streets-v8', //stylesheet location
+    center: [-79.23, 43.37], // position: latitude. longitude
+    zoom: 1.5 // starting zoom
+});
+
+function fly(latitude, longitude) {
+    // Fly to a random location by offsetting the point -74.50, 40
+    // by up to 5 degrees.
+    map.flyTo({
+        center: [
+            latitude,
+            longitude],
+        zoom: 6
+    });
+    showInfo();
+    //map.zoom(4);
+}
+
+</script>
+
+</body>
+</div1>
+<div2>
+<button onclick='viewGraph();' id="information">View information</button>
+</div2>
+</html>
