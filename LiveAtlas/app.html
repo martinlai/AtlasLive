@@ -2,11 +2,11 @@
 <html>
 <head>
     <meta charset='utf-8' />
-    <title></title>
+    <title>Atlas Live</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.17.0/mapbox-gl.js'></script>
-    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.17.0/mapbox-gl.css' rel='stylesheet' />
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.17.0/mapbox-gl.css' rel='stylesheet'/>
     <style>
         body { margin:0; padding:0; }
         #map { position:absolute; top:0; bottom:0; width:100%; }
@@ -15,38 +15,40 @@
 <body>
 <style>
     #userInput {
-      display: block;
-      position: relative;
-      margin: 0px auto;
-      width: 600px;
-      height: 40px;
-      padding: 10px;
-      border: none;
-      border-radius: 3px;
-      font-size: 12px;
-      text-align: center;
-      color: #000;
-      background: #fff;
+      position:relative;
+      padding:8px 15px;
+      background:rgba(50, 50, 50, 0.2);
+      border:0px solid #dbdbdb;
     }
     #submitter {
-      display: block;
-      position: relative;
-      margin: 0px auto;
-      width: 600px;
-      height: 40px;
-      padding: 10px;
-      border: none;
-      border-radius: 3px;
-      font-size: 12px;
-      text-align: center;
-      color: #fff;
-      background: #ee8a65;
+      position:relative;
+      padding:6px 15px;
+      left:-8px;
+      border:2px solid #207cca;
+      background-color:#207cca;
+      color:#FFF;
+
     }
+    form {
+                width:500px;
+                margin:50px auto;
+}
+div2 {
+  margin-left: 500px;
+  margin-top: 60px;
+}
+.button:hover  {
+                background-color:#fafafa;
+                color:#207cca;
+}
 </style>
 <div id='map'></div>
 <br/>
-<input type="text" id="userInput"></input>
-<button onclick='submit();' id="submitter">Fly</button>
+<div2>
+  <input type="text" placeholder="Search..." id="userInput"></input>
+  <button onclick='submit();' id="submitter">Search</button>
+</div2>
+
 
 <script>
 function submit() {

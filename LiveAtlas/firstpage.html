@@ -22,7 +22,7 @@
 <div1>
 <body>
 	<br>
-	<p1> Atlas Live Project!</p>
+	<p1> ATLAS LIVE PROJECT!</p>
 
 	<input type="text" id="datepicker" placeholder="dd/mm/yyyy">
 	<br>
@@ -43,12 +43,19 @@
 	<input type="text" id="duration" placeholder="Duration">
 
 	<button onclick='submit();' id="search">search</button>
+
+	<div2>
+		<a href="graph.html">Rainfall</a>	
+		<a href="graphmaltavegetation.html">Vegetation</a>
+		<a href="graphmaltaseasonal.html">Seasonal</a>
+	</div2>
+
 	<script>
 	function submit() {
 	  var didClickIt = false;
 	  input = document.getElementById("location").value;
 	//  GET /geocoding/v5/{mode}/{query}.json
-
+	// <a onclick='viewGraph();' id="information">View information</a>
 	  if (input.toUpperCase() == "MALTA") {
 	    fly(14.375416, 35.937496);
 	  } else if (input.toUpperCase() == "JERUSALEM") {
@@ -78,14 +85,9 @@
 		zoom: 6
 	    });
 	    showInfo();
-	    //map.zoom(4);
 	}
-
 	</script>
 
 </body>
 </div1>
-<div2>
-<button onclick='viewGraph();' id="information">View information</button>
-</div2>
 </html>
