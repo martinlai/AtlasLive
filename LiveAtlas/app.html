@@ -4,6 +4,8 @@
     <meta charset='utf-8' />
     <title>Atlas Live</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+<script src='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js'></script>
+<link href='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css' rel='stylesheet' />
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.17.0/mapbox-gl.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.17.0/mapbox-gl.css' rel='stylesheet'/>
@@ -37,6 +39,7 @@
       background-color:#207cca;
       color:#FFF;
       top: 500px;
+      visibility: hidden;
     }
     #veg{
       position: relative;
@@ -44,6 +47,7 @@
       background-color:#207cca;
       color:#FFF;
       top: 500px;
+      visibility: hidden;
     }
     #temp{
       position: relative;
@@ -51,6 +55,7 @@
       background-color:#207cca;
       color:#FFF;
       top: 500px;
+      visibility: hidden;
     }
 div2 {
   margin-left: 35%;
@@ -66,20 +71,16 @@ ul li {
   display: inline;
   margin-right: 80px;
 }
-  
-
-footer {
-
-}
 .button:hover  {
                 background-color:#fafafa;
                 color:#207cca;
 }
+
 </style>
 <div id='map'></div>
 <br/>
 <div2>
-  <input type="text" placeholder="Search..." id="userInput"></input>
+  <input type="text" placeholder="Search..." id="userInput" onkeydown="keyPressed(event)"></input>
   <button onclick='submit();' id="submitter">Search</button>
 </div2>
 
@@ -104,41 +105,37 @@ function graph() {
     popupWindow = window.open('graphmaltaseasonal.html', 'name', 'width=900,height=550');
     popupWindow.focus();
   }
+function keyPressed(event) {
+  if (event.which == 13 || event.keyCode == 13) {
+        submit();
+    }
+  }
+
+L.mapbox.accessToken = 'pk.eyJ1IjoibGlkaXlhbSIsImEiOiJjaW5jb3A4b3Uwd25idHFsd2toeGZuZWxwIn0.Pq8coI5Dw64qXL7VqFzHMA';
+var geocoder = L.mapbox.geocoder('mapbox.places'),
+    map = L.mapbox.map('map', 'examples.map-h67hf2ic');
+
 
 function submit() {
-  var didClickIt = false;
-  input = document.getElementById("userInput").value;
-//  GET /geocoding/v5/{mode}/{query}.json
 
-  if (input.toUpperCase() == "MALTA") {
-    fly(14.375416, 35.937496);
-  } else if (input.toUpperCase() == "JERUSALEM") {
-    fly(35.213710, 31.768319);
-  } else if (input.toUpperCase() == "CHORNOBYL") {
-    fly(30.1055, 51.3894);
-  } else {
-    fly(-79.3832, 43.6532); //toronto
-  }
+  input = document.getElementById("userInput").value;
+  geocoder.query(input, showMap);
+  
+
 }
 
-mapboxgl.accessToken = 'pk.eyJ1IjoibGlkaXlhbSIsImEiOiJjaW5jb3A4b3Uwd25idHFsd2toeGZuZWxwIn0.Pq8coI5Dw64qXL7VqFzHMA';
-var map = new mapboxgl.Map({
-    container: 'map', // container id
-    style: 'mapbox://styles/mapbox/streets-v8', //stylesheet location
-    center: [-79.23, 43.37], // position: latitude. longitude
-    zoom: 1 // starting zoom
-});
-
-function fly(latitude, longitude) {
-    // Fly to a random location by offsetting the point -74.50, 40
-    // by up to 5 degrees.
-    map.flyTo({
-        center: [
-            latitude,
-            longitude],
-        zoom: 10
-    });
-    //map.zoom(4);
+function showMap(err, data) {
+    // The geocoder can return an area, like a city, or a
+    // point, like an address. Here we handle both cases,
+    // by fitting the map bounds to an area or zooming to a point.
+    if (data.lbounds) {
+        map.fitBounds(data.lbounds);
+    } else if (data.latlng) {
+        map.setView([data.latlng[0], data.latlng[1]], 13);
+    }
+  document.getElementById("rain").style.visibility = "visible";
+  document.getElementById("veg").style.visibility = "visible";
+  document.getElementById("temp").style.visibility = "visible";
 }
 
 </script>
