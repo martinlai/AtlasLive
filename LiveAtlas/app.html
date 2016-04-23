@@ -15,10 +15,12 @@
 <body>
 <style>
     #userInput {
+      width: 25%;
       position:relative;
       padding:8px 15px;
       background:rgba(50, 50, 50, 0.2);
       border:0px solid #dbdbdb;
+      background-color:#ffffff;
     }
     #submitter {
       position:relative;
@@ -29,13 +31,13 @@
       color:#FFF;
 
     }
-    form {
-                width:500px;
-                margin:50px auto;
-}
 div2 {
-  margin-left: 500px;
-  margin-top: 60px;
+  margin-left: 35%;
+  margin-top: 40px;
+}
+div3 {
+
+  margin-bottom: 10px;
 }
 .button:hover  {
                 background-color:#fafafa;
@@ -49,8 +51,26 @@ div2 {
   <button onclick='submit();' id="submitter">Search</button>
 </div2>
 
+<div3>
+    <button onclick='graph();'>Rainfall</button>  
+    <button onclick='graphVeg();'>Vegetation</button>
+    <button onclick='graphSeason();'>Temperature</button>
+</div3>
 
 <script>
+function graph() {
+    popupWindow = window.open('graph.html', 'name', 'width=700,height=350');
+    popupWindow.focus();
+  }
+  function graphVeg() {
+    popupWindow = window.open('graphmaltavegetation.html', 'name', 'width=700,height=350');
+    popupWindow.focus();
+  }
+  function graphSeason() {
+    popupWindow = window.open('graphmaltaseasonal.html', 'name', 'width=700,height=350');
+    popupWindow.focus();
+  }
+
 function submit() {
   var didClickIt = false;
   input = document.getElementById("userInput").value;
@@ -82,7 +102,7 @@ function fly(latitude, longitude) {
         center: [
             latitude,
             longitude],
-        zoom: 6
+        zoom: 10
     });
     //map.zoom(4);
 }

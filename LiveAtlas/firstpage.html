@@ -45,17 +45,28 @@
 	<button onclick='submit();' id="search">search</button>
 
 	<div2>
-		<a href="graph.html">Rainfall</a>	
-		<a href="graphmaltavegetation.html">Vegetation</a>
-		<a href="graphmaltaseasonal.html">Seasonal</a>
+		<button onclick='graph();'>Rainfall</button>	
+		<button onclick='graph();'>Rainfall</button>
+		<button onclick='graph();'>Rainfall</button>
 	</div2>
 
 	<script>
+	function graph() {
+		popupWindow = window.open('graph.html', 'name', 'width=700,height=350');
+		popupWindow.focus();
+	}
+	function graphVeg() {
+		popupWindow = window.open('graphmaltavegetation.html', 'name', 'width=700,height=350');
+		popupWindow.focus();
+	}
+	function graphVSeason() {
+		popupWindow = window.open('graphmaltaseasonal.html', 'name', 'width=700,height=350');
+		popupWindow.focus();
+	}
 	function submit() {
 	  var didClickIt = false;
 	  input = document.getElementById("location").value;
-	//  GET /geocoding/v5/{mode}/{query}.json
-	// <a onclick='viewGraph();' id="information">View information</a>
+
 	  if (input.toUpperCase() == "MALTA") {
 	    fly(14.375416, 35.937496);
 	  } else if (input.toUpperCase() == "JERUSALEM") {
