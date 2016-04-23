@@ -31,13 +31,45 @@
       color:#FFF;
 
     }
+    #rain{
+      position: relative;
+      border:2px solid #207cca;
+      background-color:#207cca;
+      color:#FFF;
+      top: 500px;
+    }
+    #veg{
+      position: relative;
+      border:2px solid #207cca;
+      background-color:#207cca;
+      color:#FFF;
+      top: 500px;
+    }
+    #temp{
+      position: relative;
+      border:2px solid #207cca;
+      background-color:#207cca;
+      color:#FFF;
+      top: 500px;
+    }
 div2 {
   margin-left: 35%;
   margin-top: 40px;
 }
-div3 {
+ul {
+  padding: 0px;
+  list-style: none;
+  font-weight: bold;
+  text-align: center;
+}
+ul li {
+  display: inline;
+  margin-right: 80px;
+}
+  
 
-  margin-bottom: 10px;
+footer {
+
 }
 .button:hover  {
                 background-color:#fafafa;
@@ -51,23 +83,25 @@ div3 {
   <button onclick='submit();' id="submitter">Search</button>
 </div2>
 
-<div3>
-    <button onclick='graph();'>Rainfall</button>  
-    <button onclick='graphVeg();'>Vegetation</button>
-    <button onclick='graphSeason();'>Temperature</button>
-</div3>
+<footer>
+  <ul>
+    <li><button onclick='graph();' id='rain'>Rainfall</button> </li>
+    <li><button onclick='graphVeg();' id='veg'>Vegetation</button></li>
+    <li><button onclick='graphSeason();' id='temp'>Temperature</button></li>
+  </ul>
+</footer>
 
 <script>
 function graph() {
-    popupWindow = window.open('graph.html', 'name', 'width=700,height=350');
+    popupWindow = window.open('graph.html', 'name', 'width=900,height=550');
     popupWindow.focus();
   }
   function graphVeg() {
-    popupWindow = window.open('graphmaltavegetation.html', 'name', 'width=700,height=350');
+    popupWindow = window.open('graphmaltavegetation.html', 'name', 'width=900,height=550');
     popupWindow.focus();
   }
   function graphSeason() {
-    popupWindow = window.open('graphmaltaseasonal.html', 'name', 'width=700,height=350');
+    popupWindow = window.open('graphmaltaseasonal.html', 'name', 'width=900,height=550');
     popupWindow.focus();
   }
 
