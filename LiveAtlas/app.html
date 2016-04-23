@@ -37,6 +37,7 @@
       background-color:#207cca;
       color:#FFF;
       top: 500px;
+	  visibility: hidden;
     }
     #veg{
       position: relative;
@@ -44,6 +45,7 @@
       background-color:#207cca;
       color:#FFF;
       top: 500px;
+	  visibility: hidden;
     }
     #temp{
       position: relative;
@@ -51,6 +53,7 @@
       background-color:#207cca;
       color:#FFF;
       top: 500px;
+	  visibility: hidden;
     }
 div2 {
   margin-left: 35%;
@@ -91,6 +94,7 @@ footer {
   </ul>
 </footer>
 
+
 <script>
 function graph() {
     popupWindow = window.open('graph.html', 'name', 'width=900,height=550');
@@ -109,6 +113,10 @@ function submit() {
   var didClickIt = false;
   input = document.getElementById("userInput").value;
 //  GET /geocoding/v5/{mode}/{query}.json
+  	document.getElementById("rain").style.visibility = "visible";
+	document.getElementById("veg").style.visibility = "visible";
+	document.getElementById("temp").style.visibility = "visible";
+	
 
  if (input.toUpperCase() == "MALTA") {
       fly(14.375416, 35.937496);
