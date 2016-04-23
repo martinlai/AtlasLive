@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<title>Use geocoder to set map position</title>
+<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+<script src='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js'></script>
+<link href='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css' rel='stylesheet' />
+<style>
+  body { margin:0; padding:0; }
+  #map { position:absolute; top:0; bottom:0; width:100%; }
+  #userInput {
+      width: 25%;
+      position:relative;
+      padding:8px 15px;
+      background:rgba(50, 50, 50, 0.2);
+      border:0px solid #dbdbdb;
+      background-color:#ffffff;
+    }
+    #submitter {
+      position:relative;
+      padding:6px 15px;
+      left:-8px;
+      border:2px solid #207cca;
+      background-color:#207cca;
+      color:#FFF;
+
+    }
+    div2 {
+  margin-left: 35%;
+  margin-top: 40px;
+}
+</style>
+</head>
+<body>
+<div id='map'></div>
+<br/>
+<div2>
+  <input type="text" placeholder="Search..." id="userInput"></input>
+  <button onclick='submit();' id="submitter">Search</button>
+</div2>
+<script>
+
+L.mapbox.accessToken = 'pk.eyJ1IjoibGlkaXlhbSIsImEiOiJjaW5jb3A4b3Uwd25idHFsd2toeGZuZWxwIn0.Pq8coI5Dw64qXL7VqFzHMA';
+var geocoder = L.mapbox.geocoder('mapbox.places'),
+    map = L.mapbox.map('map', 'examples.map-h67hf2ic');
+
+
+function submit() {
+  input = document.getElementById("userInput").value;
+  geocoder.query(input, showMap);
+}
+
+function showMap(err, data) {
+    // The geocoder can return an area, like a city, or a
+    // point, like an address. Here we handle both cases,
+    // by fitting the map bounds to an area or zooming to a point.
+    if (data.lbounds) {
+        map.fitBounds(data.lbounds);
+    } else if (data.latlng) {
+        map.setView([data.latlng[0], data.latlng[1]], 13);
+    }
+}
+</script>
+</body>
+</html>
