@@ -258,9 +258,9 @@ function setArray(data) {
        monthnum = date.getMonth();
        yearnum = date.getFullYear();
        console.log(temp);
-       //console.log(date);
-       //console.log(monthnum);
-       if(yearnum == 2015) {
+       console.log(date);
+       console.log(monthnum);
+       if(yearnum != 2014) {
         temps[monthnum+12] = temp;
         } else {
           temps[monthnum] = temp;
@@ -271,18 +271,18 @@ function setArray(data) {
    }
    setTimeout(function() {
     console.log(temps)
-    reorder(temps);
+    //reorder(temps);
     
     window.localStorage.setItem("temp", JSON.stringify(temps));
   }, 1500);
  }
-function reorder(array) {
+/*function reorder(array) {
   var arraytosend = []
   for (var i = 0; i< 25; i++) {
     arraytosend[i] = array[i];
   }
   console.log(arraytosend);
-}
+}*/
 </script>
 
 </body>
