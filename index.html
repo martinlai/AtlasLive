@@ -106,7 +106,10 @@ ul li {
 <script>
 
 function displayGraph(temps) {
-    popupWindow = window.open('graphing.html', 'name', 'width=900,height=650');
+    var left = (screen.width/2)-(1000/2);
+    var top = (screen.height/2)-(650/2);
+    popupWindow = window.open('graphing.html', 'name', 'width=1000, height=650', 
+    'top = '+top+', left = '+left);
     popupWindow.focus();
   }
   
