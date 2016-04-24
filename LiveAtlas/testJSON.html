@@ -4,15 +4,20 @@
     <p id="weather">Here's the weather:<p>
 
     <button onclick="b()">Submit</button>
-        <script>
+            
+	<script> 
+
+
 
         function b(){
+		document.write("hello");
+			// get the lat/long here from the map
+		    var lati = 43;
+			var longi = -80;
 
             var apiKey = 'de2b92a86e87b18638fb503531d43fa0';
             var url = 'https://api.forecast.io/forecast/';
-            // waterloo
-            var lati = 43;
-            var longi = -80;
+ 
             // 2015-10-10T12:00:00-0400
             var year = 2015;
             var month = "0" + 1;
