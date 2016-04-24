@@ -45,8 +45,17 @@
         <script src="http://d3js.org/d3.v3.min.js"></script>
         <script>
 
-        var arrayz = JSON.parse(window.localStorage.getItem("temp"));
-        console.log(arrayz);
+        var istemp = window.localStorage.getItem("isTemp");
+
+        if (istemp) {
+            var arrayz = JSON.parse(window.localStorage.getItem("temp"));
+            console.log(arrayz);
+        } else {
+            var arrayz = JSON.parse(window.localStorage.getItem("wind"));
+            console.log(arrayz);
+        }
+
+        
     
         var j = 0;
 
