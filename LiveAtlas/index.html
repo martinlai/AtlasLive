@@ -231,7 +231,7 @@ function setArray(data) {
   var month = "0" + 1;
   var day = 10;
   var time = 'T12:00:00-0400';
-  var temp = 0;
+  var temp = [];
   var data;
   var i = 1;
 
@@ -254,18 +254,35 @@ function setArray(data) {
     }
     $.getJSON(url + apiKey + "/" + lati + "," + longi + "," + year + "-" + month + "-" + day + time + "?callback=?", function(data) {
        temp = data.currently.temperature;
-       temps.push(temp);
+       date = new Date(data.currently.time*1000);
+       monthnum = date.getMonth();
+       yearnum = date.getFullYear();
+       console.log(temp);
+       //console.log(date);
+       //console.log(monthnum);
+       if(yearnum == 2015) {
+        temps[monthnum+12] = temp;
+        } else {
+          temps[monthnum] = temp;
+        }
      });
      i = i + 1;
+
    }
    setTimeout(function() {
-    var s = document.getElementById('mydata');
-    s.value = temps; 
-    console.log(temps);
+    console.log(temps)
+    reorder(temps);
+    
     window.localStorage.setItem("temp", JSON.stringify(temps));
-  }, 600);
+  }, 1500);
  }
-
+function reorder(array) {
+  var arraytosend = []
+  for (var i = 0; i< 25; i++) {
+    arraytosend[i] = array[i];
+  }
+  console.log(arraytosend);
+}
 </script>
 
 </body>
