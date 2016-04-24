@@ -35,16 +35,32 @@
       font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;
 
     }
-    #graph, #stats {
-      position: relative;
+    #graph {
+      position: absolute;
       border:1px solid #207cca;
       background-color: #4CAF50;
       color:#FFF;
       font-weight:bold;
-      top: 500px;
+      bottom: 50px;
+   
       width: 150px;
       height: 40px;
       visibility: hidden;
+      font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;
+    }
+    #stats {
+      /*line-height: 12px; */
+       margin-top: 15px;
+       margin-right: 30px;
+       width: 100px;
+      height: 35px;
+       position:absolute;
+       top:0;
+       right:0;
+       border:1px solid #207cca;
+      background-color: #4CAF50;
+      color:#FFF;
+      font-weight:bold;
       font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;
     }
     #mydata {
@@ -82,14 +98,14 @@ ul li {
 <footer>
   <ul>
     <li><button onclick='displayGraph();' id='graph'>Graph</button> </li>
-    <li><button onclick='displayStats();' id='stats'>Analyze</button> </li>
+    <li><button onclick='displayStats();' id='stats'>Statistics</button> </li>
   </ul>
 </footer>
 <div id="mydata" class="myData"></div>
 
 <script>
+
 function displayGraph(temps) {
-    
     popupWindow = window.open('realtime.html', 'name', 'width=900,height=650');
     popupWindow.focus();
   }
@@ -118,6 +134,7 @@ function submit() {
 
 }
 
+
 function showMap(err, data) {
     // The geocoder can return an area, like a city, or a
     // point, like an address. Here we handle both cases,
@@ -131,6 +148,7 @@ function showMap(err, data) {
   document.getElementById("stats").style.visibility = "visible";
   setArray(data);
 }
+
 
 function setArray(data) {
   var temps = [];
@@ -170,9 +188,7 @@ function setArray(data) {
     s.value = temps; 
     window.localStorage.setItem("temp", JSON.stringify(temps));
   }, 600);
-
-    // saving
-}
+ }
 
 </script>
 
