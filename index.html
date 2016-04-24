@@ -106,7 +106,7 @@ ul li {
 <script>
 
 function displayGraph(temps) {
-    popupWindow = window.open('realtime.html', 'name', 'width=900,height=650');
+    popupWindow = window.open('graphing.html', 'name', 'width=900,height=650');
     popupWindow.focus();
   }
   
@@ -170,9 +170,15 @@ function setArray(data) {
 
     if (i < 10) {
         month = "0" + i;
-    } else if(month > 12) {
+    } else if (month > 12) {
         year = 2015;
-        month = i % 12;
+        month = i - 12;
+        if (month < 10) {
+          month = "0" + month;
+
+        } else {
+          month = month;
+        }
     }
     else {
         month = i;
@@ -186,6 +192,7 @@ function setArray(data) {
    setTimeout(function() {
     var s = document.getElementById('mydata');
     s.value = temps; 
+    console.log(temps);
     window.localStorage.setItem("temp", JSON.stringify(temps));
   }, 600);
  }

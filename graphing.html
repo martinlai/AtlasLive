@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+	<div id="myDiv" style="width:600px;height:250px;"></div>
+	<script>
+
+	var arrayz = JSON.parse(window.localStorage.getItem("temp"));
+    console.log(arrayz);
+
+    var arr14 = [];
+    var arr15 = [];
+
+    for (var i = 0; i<12; i = i + 1) {
+    	arr14[i] = arrayz[i];
+    }
+    for (var j = 0; j<12; j = j + 1) {
+    	arr15[j] = arrayz[12 + j];
+    }
+
+    console.log(arr14);
+    console.log(arr15);
+    /*
+	var data = [
+	 {
+	    x: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+	    y: arrayz,
+	    type: 'bar'
+	 }
+	];
+
+	Plotly.newPlot('tester', data);
+	*/
+
+
+	var trace1 = {
+	  x: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+	  y: arr14,
+	  name: 'Temperature 2014',
+	  type: 'bar'
+	};
+
+	var trace2 = {
+	  x: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+	  y: arr15,
+	  name: 'Temperature 2015',
+	  type: 'bar'
+	};
+
+	var data = [trace1, trace2];
+
+	var layout = {barmode: 'group'};
+
+	Plotly.newPlot('myDiv', data, layout);
+	</script>
+</body>
+</html>
