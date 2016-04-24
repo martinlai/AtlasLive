@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <body>
+    <p id="weather">Here's the weather:<p>
+    <script> 
+    var lati = 43;
+    var longi = -80;
+    var temps = [];
+    </script>
+    <button onclick="b(lati, longi)">Submit</button>
+        <script>
+
+        function b(lati, longi){
+
+            var apiKey = 'de2b92a86e87b18638fb503531d43fa0';
+            var url = 'https://api.forecast.io/forecast/';
+
+            // 2015-10-10T12:00:00-0400
+            var year = 2015;
+            var day = 10;
+            var time = 'T12:00:00-0400';
+
+            var data;
+
+            var i = 1;
+            while (i <= 12) {
+                if (i < 10) {
+                    month = "0" + i;
+                } else {
+                    month = i;
+                }
+                $.getJSON(url + apiKey + "/" + lati + "," + longi + "," + year + "-" + month + "-" + day + time + "?callback=?", function(data) {
+                console.log(data);
+                temps[i-1] = data.currently.temperature;
+                //$('#weather').html('and the temperature is: ' + data.currently.temperature);
+            });
+                i = i + 1;
+            }
+            console.log(temps[0]);
+            console.log(temps[11]);
+        }
+        </script>
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+    </body>
+</html>
