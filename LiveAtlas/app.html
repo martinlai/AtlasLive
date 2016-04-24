@@ -33,7 +33,7 @@
       color:#FFF;
 
     }
-    #rain{
+    #graph{
       position: relative;
       border:2px solid #207cca;
       background-color:#207cca;
@@ -41,37 +41,10 @@
       top: 500px;
       visibility: hidden;
     }
-    #veg{
-      position: relative;
-      border:2px solid #207cca;
-      background-color:#207cca;
-      color:#FFF;
-      top: 500px;
+    #mydata {
       visibility: hidden;
     }
-    #temp{
-      position: relative;
-      border:2px solid #207cca;
-      background-color:#207cca;
-      color:#FFF;
-      top: 500px;
-      visibility: hidden;
-    }
-	#other{
-      position: relative;
-      border:2px solid #207cca;
-      background-color:#207cca;
-      color:#FFF;
-      top: 500px;
-      visibility: hidden;
-    }
-	
-	#colorstrip{
-    width: 100%; height: 2px;
-    border-style: solid;
-    border-color: black;
-    background-color: black;
-	}
+
 div2 {
   margin-left: 35%;
   margin-top: 40px;
@@ -101,26 +74,18 @@ ul li {
 
 <footer>
   <ul>
-    <li><button onclick='graph();' id='rain'>Rainfall</button> </li>
-    <li><button onclick='graphVeg();' id='veg'>Vegetation</button></li>
-    <li><button onclick='graphSeason();' id='temp'>Temperature</button></li>
-	<li><p id='other'>hello</p>
+    <li><button onclick='displayGraph();' id='graph'>Graph</button> </li>
   </ul>
 </footer>
+<div id="mydata" class="myData"></div>
 
 <script>
-function graph() {
-    popupWindow = window.open('graph.html', 'name', 'width=900,height=550');
+function displayGraph(temps) {
+    
+    popupWindow = window.open('realtime.html', 'name', 'width=900,height=650');
     popupWindow.focus();
   }
-  function graphVeg() {
-    popupWindow = window.open('graphmaltavegetation.html', 'name', 'width=900,height=550');
-    popupWindow.focus();
-  }
-  function graphSeason() {
-    popupWindow = window.open('graphmaltaseasonal.html', 'name', 'width=900,height=550');
-    popupWindow.focus();
-  }
+  
 function keyPressed(event) {
   if (event.which == 13 || event.keyCode == 13) {
         submit();
@@ -133,8 +98,10 @@ var geocoder = L.mapbox.geocoder('mapbox.places'),
 
 
 function submit() {
+
   input = document.getElementById("userInput").value;
   geocoder.query(input, showMap);
+  
 
 }
 
@@ -147,45 +114,53 @@ function showMap(err, data) {
     } else if (data.latlng) {
         map.setView([data.latlng[0], data.latlng[1]], 13);
     }
-  document.getElementById("rain").style.visibility = "visible";
-  document.getElementById("veg").style.visibility = "visible";
-  document.getElementById("temp").style.visibility = "visible";
-    b(data);
-
+  document.getElementById("graph").style.visibility = "visible";
+  setArray(data);
 }
 
+function setArray(data) {
+  var temps = [];
+  var lati = data.latlng[0];
+  var longi = data.latlng[1];
 
+  var apiKey = 'de2b92a86e87b18638fb503531d43fa0';
+  var url = 'https://api.forecast.io/forecast/';
 
+  var year = 2014;
+  var month = "0" + 1;
+  var day = 10;
+  var time = 'T12:00:00-0400';
+  var temp = 0;
+  var data;
+  var i = 1;
 
-function b(data){
-// get the lat/long here from the map
+  while (i <= 24) {
 
-			var lati = data.latlng[0];
-			var longi = data.latlng[1];
+    if (i < 10) {
+        month = "0" + i;
+    } else if(month > 12) {
+        year = 2015;
+        month = i % 12;
+    }
+    else {
+        month = i;
+    }
+    $.getJSON(url + apiKey + "/" + lati + "," + longi + "," + year + "-" + month + "-" + day + time + "?callback=?", function(data) {
+       temp = data.currently.temperature;
+       temps.push(temp);
+     });
+     i = i + 1;
+   }
+   setTimeout(function() {
+    var s = document.getElementById('mydata');
+    s.value = temps; 
+    window.localStorage.setItem("temp", JSON.stringify(temps));
+  }, 600);
 
-            var apiKey = 'de2b92a86e87b18638fb503531d43fa0';
-            var url = 'https://api.forecast.io/forecast/';
- 
-            // 2015-10-10T12:00:00-0400
-            var year = 2015;
-            var month = "0" + 1;
-            var day = 10;
-            var time = 'T12:00:00-0400';
-
-            var data;
-			
-			$.getJSON(url + apiKey + "/" + lati + "," + longi + "," + year + "-" + month + "-" + day + time + "?callback=?", function(data) {
-            console.log(data);
-            document.getElementById("other").style.visibility = "visible";
-              $('#other').html('and the temperature is: ' + data.currently.temperature);
-            });
- 
+    // saving
 }
-        </script>
 
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-
-
+</script>
 
 </body>
 </html>
