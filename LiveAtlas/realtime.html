@@ -20,7 +20,13 @@
             fill: blue;
             font-size: 0.7em;
         }
-
+        .grid .tick {
+            stroke: lightgrey;
+            opacity: 0.7;
+        }
+        .grid path {
+              stroke-width: 0;
+}
         .graph .axis .domain {
             fill: none;
             stroke: black;
@@ -96,8 +102,15 @@
             .attr('class', 'y axis')
             .attr("transform", "translate(" + width + ",0)")
             .call(y.axis = d3.svg.axis().scale(y).orient('left'))
+            
 
-     
+        svg.append("text")
+        .attr("x", 400)             
+        .attr("y", 50)
+        .attr("text-anchor", "middle")  
+        .style("font-size", "16px") 
+        .style("text-decoration", "underline")  
+        .text("Real Time Temperature Feed");
         svg.append("text")      
             .attr("x", 450)
             .attr("y", 550 )

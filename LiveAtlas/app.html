@@ -21,25 +21,31 @@
       position:relative;
       padding:8px 15px;
       background:rgba(50, 50, 50, 0.2);
-      border:0px solid #dbdbdb;
+      border:2px solid #207cca;
       background-color:#ffffff;
+       font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;
     }
     #submitter {
       position:relative;
-      padding:6px 15px;
+      padding:8px 15px;
       left:-8px;
       border:2px solid #207cca;
       background-color:#207cca;
       color:#FFF;
+      font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;
 
     }
-    #graph{
+    #graph, #stats {
       position: relative;
-      border:2px solid #207cca;
-      background-color:#207cca;
+      border:1px solid #207cca;
+      background-color: #4CAF50;
       color:#FFF;
+      font-weight:bold;
       top: 500px;
+      width: 150px;
+      height: 40px;
       visibility: hidden;
+      font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;
     }
     #mydata {
       visibility: hidden;
@@ -60,8 +66,8 @@ ul li {
   margin-right: 80px;
 }
 .button:hover  {
-                background-color:#fafafa;
-                color:#207cca;
+                background-color:#76EE00;
+                color:#76EE00;
 }
 
 </style>
@@ -72,9 +78,11 @@ ul li {
   <button onclick='submit();' id="submitter">Search</button>
 </div2>
 
+
 <footer>
   <ul>
     <li><button onclick='displayGraph();' id='graph'>Graph</button> </li>
+    <li><button onclick='displayStats();' id='stats'>Analyze</button> </li>
   </ul>
 </footer>
 <div id="mydata" class="myData"></div>
@@ -86,6 +94,11 @@ function displayGraph(temps) {
     popupWindow.focus();
   }
   
+function displayStats() {
+
+  popupWindow = window.open('CompareTemp.html', 'name', 'width=900, height = 650');
+  popupWindow.focus();
+}
 function keyPressed(event) {
   if (event.which == 13 || event.keyCode == 13) {
         submit();
@@ -115,6 +128,7 @@ function showMap(err, data) {
         map.setView([data.latlng[0], data.latlng[1]], 13);
     }
   document.getElementById("graph").style.visibility = "visible";
+  document.getElementById("stats").style.visibility = "visible";
   setArray(data);
 }
 
