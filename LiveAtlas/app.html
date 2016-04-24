@@ -97,7 +97,7 @@ ul li {
 function displayGraph(temps) {
     var p = document.getElementById('flag');
     p.value = flag;
-    window.localStorage.setItem("isTemp", true);
+    window.localStorage.setItem("isTemp", JSON.stringify(true));
     popupWindow = window.open('realtime.html', 'name', 'width=900,height=650');
     popupWindow.focus();
   }
@@ -105,7 +105,7 @@ function displayGraph(temps) {
 function displayGraphWind(winds) {
   var p = document.getElementById('flag');
     p.value = flag;
-    window.localStorage.setItem("isTemp", false);
+    window.localStorage.setItem("isTemp", SON.stringify(false));
     popupWindow = window.open('realtime.html', 'name', 'width=900,height=650');
     popupWindow.focus();
   }

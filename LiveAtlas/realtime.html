@@ -47,7 +47,7 @@
 
         var istemp = window.localStorage.getItem("isTemp");
 
-        if (istemp) {
+        if (istemp == "true") {
             var arrayz = JSON.parse(window.localStorage.getItem("temp"));
             console.log(arrayz);
         } else {
