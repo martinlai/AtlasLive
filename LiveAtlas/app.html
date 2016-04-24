@@ -35,22 +35,35 @@
       font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;
 
     }
-    #graph, #windgraph, #stats {
-      position: relative;
+    #graph {
+      position: absolute;
       border:1px solid #207cca;
       background-color: #4CAF50;
       color:#FFF;
       font-weight:bold;
-      top: 500px;
+      bottom: 50px;
+   
       width: 150px;
       height: 40px;
       visibility: hidden;
       font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;
     }
-    #mydata {
-      visibility: hidden;
+    #stats {
+      /*line-height: 12px; */
+       margin-top: 15px;
+       margin-right: 30px;
+       width: 100px;
+      height: 35px;
+       position:absolute;
+       top:0;
+       right:0;
+       border:1px solid #207cca;
+      background-color: #4CAF50;
+      color:#FFF;
+      font-weight:bold;
+      font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;
     }
-    #datatwo, #flag {
+    #mydata {
       visibility: hidden;
     }
 
@@ -84,28 +97,15 @@ ul li {
 
 <footer>
   <ul>
-    <li><button onclick='displayGraph();' id='graph'>Graph Temperature</button> </li>
-    <li><button onclick='displayGraphWind();' id='windgraph'>Graph Wind Power</button> </li>
-    <li><button onclick='displayStats();' id='stats'>Analyze</button> </li>
+    <li><button onclick='displayGraph();' id='graph'>Graph</button> </li>
+    <li><button onclick='displayStats();' id='stats'>Statistics</button> </li>
   </ul>
 </footer>
 <div id="mydata" class="myData"></div>
-<div id="datatwo" class="dataTwo"></div>
-<div id="flag" class="boolFlag"></div>
+
 <script>
 
 function displayGraph(temps) {
-    var p = document.getElementById('flag');
-    p.value = flag;
-    window.localStorage.setItem("isTemp", JSON.stringify(true));
-    popupWindow = window.open('realtime.html', 'name', 'width=900,height=650');
-    popupWindow.focus();
-  }
-
-function displayGraphWind(winds) {
-  var p = document.getElementById('flag');
-    p.value = flag;
-    window.localStorage.setItem("isTemp", SON.stringify(false));
     popupWindow = window.open('realtime.html', 'name', 'width=900,height=650');
     popupWindow.focus();
   }
@@ -145,10 +145,8 @@ function showMap(err, data) {
         map.setView([data.latlng[0], data.latlng[1]], 13);
     }
   document.getElementById("graph").style.visibility = "visible";
-  document.getElementById("windgraph").style.visibility = "visible";
   document.getElementById("stats").style.visibility = "visible";
   setArray(data);
-  setArrayWind(data);
 }
 
 
@@ -191,49 +189,6 @@ function setArray(data) {
     window.localStorage.setItem("temp", JSON.stringify(temps));
   }, 600);
  }
-
-
-
-function setArrayWind(data) {
-  var winds = [];
-  var lati = data.latlng[0];
-  var longi = data.latlng[1];
-
-  var apiKey = 'de2b92a86e87b18638fb503531d43fa0';
-  var url = 'https://api.forecast.io/forecast/';
-
-  var year = 2014;
-  var month = "0" + 1;
-  var day = 10;
-  var time = 'T12:00:00-0400';
-  var temp = 0;
-  var data;
-  var i = 1;
-
-  while (i <= 24) {
-
-    if (i < 10) {
-        month = "0" + i;
-    } else if(month > 12) {
-        year = 2015;
-        month = i % 12;
-    }
-    else {
-        month = i;
-    }
-    $.getJSON(url + apiKey + "/" + lati + "," + longi + "," + year + "-" + month + "-" + day + time + "?callback=?", function(data) {
-       temp = data.currently.windSpeed;
-       winds.push(temp);
-     });
-     i = i + 1;
-   }
-   setTimeout(function() {
-    var p = document.getElementById('datatwo');
-    p.value = winds; 
-    window.localStorage.setItem("wind", JSON.stringify(winds));
-
-  }, 600);
-}
 
 </script>
 

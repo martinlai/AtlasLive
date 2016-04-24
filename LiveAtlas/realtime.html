@@ -45,16 +45,9 @@
         <script src="http://d3js.org/d3.v3.min.js"></script>
         <script>
 
-        var istemp = window.localStorage.getItem("isTemp");
-
-        if (istemp == "true") {
-            var arrayz = JSON.parse(window.localStorage.getItem("temp"));
-            console.log(arrayz);
-        } else {
-            var arrayz = JSON.parse(window.localStorage.getItem("wind"));
-            console.log(arrayz);
-        }
-
+        
+        var arrayz = JSON.parse(window.localStorage.getItem("temp"));
+        console.log(arrayz);
         
     
         var j = 0;
@@ -64,7 +57,7 @@
             duration = 400,
             now = new Date(Date.now() - duration)
 
-        var width = 900,
+        var width = 800,
             height = 500
 
 
@@ -119,7 +112,7 @@
         .attr("text-anchor", "middle")  
         .style("font-size", "16px") 
         .style("text-decoration", "underline")  
-        .text("Real Time Temperature Feed");
+        .text("Tempreture Progression Over 2 Years");
         svg.append("text")      
             .attr("x", 450)
             .attr("y", 550 )
@@ -134,7 +127,7 @@
             .attr("y", -850)
             .attr("dy", ".75em")
            // .attr("transform", "rotate(-90)")
-            .text("Temperature");
+            .text("Temperature (F)");
 
 
         var paths = svg.append('g')
